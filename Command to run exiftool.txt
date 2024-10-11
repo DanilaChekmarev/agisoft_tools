@@ -1,0 +1,1 @@
+exiftool -csv=C:\Users\danil\Desktop\Frames\exif_output.csv C:\Users\danil\Desktop\Frames
