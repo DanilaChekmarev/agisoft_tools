@@ -25,12 +25,9 @@ east_interp = []
 alt_interp = []
 yaw_interp = []
 
-frame_number = 0
-SourceFile = []
-SourceFilePath = "C:/Users/danil/Desktop/Frames/frame"
-
 # Интерполировать для каждой "времени" в файле cam_csv
 for msec in cam_csv['grabMsec']:
+
     # Интерполяция с использованием splrep и splev
     tck_nord = splrep(gps_time, nord, s=0)
     tck_east = splrep(gps_time, east, s=0)
@@ -47,8 +44,30 @@ for msec in cam_csv['grabMsec']:
     alt_interp.append(alt_val if np.isfinite(alt_val) else None)
     yaw_interp.append(yaw_val if np.isfinite(yaw_val) else None)
 
-    SourceFile.append(SourceFilePath + str(frame_number) + ".png")
-    frame_number += 1
+"""
+SourceFile = []
+SourceFilePath = "C:/Users/danil/Desktop/Project5/Videos/images/"
+episode = cam_csv['episode'].values
+
+j = 0
+previous_episode = episode[0]
+for i in range(len(cam_csv['grabNumber'])):
+    if (previous_episode != episode[i]):
+        j = 0
+    SourceFile.append(SourceFilePath + episode[i] + str(j) + ".png")
+    j += 1
+    previous_episode = episode[i]
+"""
+
+SourceFile = []
+SourceFilePath = "C:/Users/danil/Desktop/Project5/Videos/images/"
+num = 100000
+
+for i in range(len(cam_csv['grabNumber'])):
+    img_num = str(num + i + 1)
+    img_num = img_num[1:]
+    SourceFile.append(SourceFilePath + img_num  +".png")
+
 
 # новый csv с результатами
 output_data = {
